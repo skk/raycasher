@@ -5,7 +5,7 @@ import java.io.File
 fun main(args: Array<String>) {
     val imageData = generatePPMImageData()
 
-    File("image.ppm").bufferedWriter().use { out ->
+    File("images/chapter1.ppm").bufferedWriter().use { out ->
         imageData.forEach {
             out.write(it)
         }
