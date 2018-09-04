@@ -1,9 +1,24 @@
 package RayCaster
 
+import java.io.File
+
 fun main(args: Array<String>) {
+    val imageData = generatePPMImageData()
+
+    File("image.ppm").bufferedWriter().use { out ->
+        imageData.forEach {
+            out.write(it)
+        }
+    }
+
+}
+
+fun generatePPMImageData(): MutableList<String> {
     val nx = 200
     val ny = 100
-    println("P3\n$nx $ny\n255\n")
+
+    val data = mutableListOf<String>()
+    data.add("P3\n$nx $ny\n255\n")
 
     val b = 0.2
 
@@ -14,7 +29,9 @@ fun main(args: Array<String>) {
             val ir = (255.99  * r).toInt()
             val ig = (255.99  * g).toInt()
             val ib = (255.99  * b).toInt()
-            println("$ir $ig $ib\n")
+            data.add("$ir $ig $ib\n")
         }
     }
+
+    return data
 }
